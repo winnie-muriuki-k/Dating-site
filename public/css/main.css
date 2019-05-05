@@ -1,0 +1,44 @@
+/*the spinner*/
+/*the spinner*/
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: green;
+  animation: spinner .3s linear infinite;
+}
+/*the spinner*/
+/*the spinner*/
+
+
+.form-control,
+.btn
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+        box-shadow: none !important;
+}
+
+img.icon{
+  padding-bottom: 5px;
+  cursor: pointer;
+  display: inline-block;
+      margin-left: -20px;
+}
+
+
+span.reset-search{
+    right: 20px;
+    position: absolute;
+    color: white;
+    padding: 5px;
+    padding-top: 0px;
+}

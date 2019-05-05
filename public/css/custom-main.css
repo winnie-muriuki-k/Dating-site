@@ -1,0 +1,9 @@
+a#home{
+    position: absolute;
+    left: 24px;
+    text-decoration: none;
+    color: #fff;
+    background: #c688eaf5;
+    padding: 10px;
+    display: block;
+}

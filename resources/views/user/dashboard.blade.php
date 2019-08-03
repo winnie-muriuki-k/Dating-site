@@ -24,151 +24,150 @@
         <link rel="stylesheet" href="{{ asset('css/custom-css.css') }}">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     </head>
-    <body data-spy="scroll" data-target="#mainNav" data-offset="70" style="background: #c3bdc2 !important;">
+    <body data-spy="scroll" data-target="#mainNav" data-offset="70" onload="doSomeWindowAdjustments()" onchange="doSomeWindowAdjustments()">
         @include('partials.header')
-        <section class="latest_news_area p_120" style="padding-bottom: 0px !important; background: #ded0e4 !important;">
+        <section class="latest_news_area p_120" style="padding-bottom: 0px !important; background: #b3b3b3 !important;">
         	<div class="container">
         		<div class="row">
                     <div class="col-md-3 col-sm-12">
 
-        				<div class="l_news_item profile-holder">
-        					<h4>Hi  {{ Auth::user()->username }}</h4>
-                            <div class="profile-img-container ">
+                        <div class="col-md-12  col-sm-12">
+                            <div class="card">
 
-                                <form onsubmit="UploadAvatar(event)" enctype="multipart/form-data" action="{{route('user-update-avatar')}}" method="POST" id="avatar">
-                                    <small id="upload-profile-image" style="display: none;">To upload an image click on your Avatar</small>
-                                    <input type="file" id="file1" name="avatar" accept="image/*" capture style="display:none"/>
-                                    <img src="{{asset('avatars/')}}/{{Auth::user()->avatar}}" id="upfile1" style="cursor:pointer" />
-                                    </p>
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <button type="submit" class="btn btn-sm btn-success">Upload profile image</button>
-                                </form>
+                              <img class="card-img-top" src="{{asset('avatars/')}}/{{Auth::user()->avatar}}" onclick="window.location.href='{{route('edit-profile')}}'" style="cursor: pointer;" 
+                               title="Edit profile picture"  id="logged_in_user_profile_pic" alt="Profile Picture">
+                              <div class="card-body">
+                                <p class="card-text">
+                                    <i class="fa fa-user"></i>&nbsp;
+                                    {{!empty(Auth::user()->username) ? Auth::user()->username : 'Set Username'}}<br>
+                                    <i class="fa fa-edit"></i>&nbsp;
+                                    <a href="{{route('edit-profile')}}" > Edit profile.</a>
+                                    <br>
+                                     Profile visitors count = <span style="color: green;">{{$visitorsCount}}</span><br>
+
+                                </p>
+                              </div>
                             </div>
-        					<div class="post_view text-center">
-                                <a href="{{route('view-profile')}}"><i class="fa fa-eye" aria-hidden="true"></i>View my profile</a>
-{{--         						<a href="#"><i class="fa fa-commenting" aria-hidden="true"></i> 07</a>
-        						<a href="#"><i class="fa fa-reply" aria-hidden="true"></i> 362</a> --}}
-        					</div>
                         </div>
+                        <hr>
+                        <div class="col-md-12  col-sm-12">
+                            <div class="card">
+                              <div class="card-body">
+                                    <h4>What s new?</h4>
+                                    <hr>
 
-                        <div class="l_news_item profile-holder">
-                            <h4>What s new?</h4>
-                            <hr>
-
-                            <div class="post_view">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <div class="post_view">
+                                        Love is that condition in which the happiness of another person is essential to your own. <br>
+                                        <small>Robert A. Heinlein, Stranger in a Strange Land</small>
+                                    </div>
+                              </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-sm-12">
-{{--                         <div class="row card" style="padding:1%; margin-bottom: 1%;">
-                            <div class="col-sm-12 col-md-12 form-inline">
-                                <div class="form-group col-md-8 col-sm-8">
-                                    <input type="text" id="search-user-name" name="search-user-name" style="width: 100%;" class="form-control" placeholder="enter username">
-                                </div>
-                                <div class="form-group col-md-4 col-sm-4">
-                                    <button class="btn btn-info btn-sm" style="width: 100%;" type="button" onclick="SearchUser('{{Auth::user()->id}}')">Search&nbsp;<i class="spinner" id="spinner-search" style="display: none;"></i></button>
-                                </div>
+             
+
+                    <div class="col-md-8 col-sm-12" id="row-two" style="margin-left: 0px;">
+
+                        <div class="row col-sm-12" id="row-one">
+                            <div class="col-md-12">
+                                <h4>Recommended Matches</h4>
                             </div>
-
-                        </div> --}}
-                        <div class="row search-results-heading" style="background: #bdd2c2;display: none;">
-                                <p class="text-center search-results-heading"  id="search-results-heading"
-                                style="width: 100%; padding: 0px !important; margin: 0px;font-size: 12px; color: #fff;">Search results.</p>
-                                <span onclick="ResetSearch()" class="reset-search">X</span>
-                        </div>
-                        <div class="row" style="background: #bdd2c2; display: none;padding-bottom: 2%" id="display-search-results">
-
-                        </div>
-                        <hr class="search-results-heading" style="display: none;">
-                        <div class="row">
                             @if(count($users)>0)
                                     @foreach($users as $user)
-                                    <div class="col-md-4" id="div-match-{{$user->id}}">
-                                        <div class="l_news_item member-profile-holder" style="text-align: center;margin-bottom: 5px;">
-                                                <img src="{{asset('avatars/')}}/{{$user->avatar}}" class="img-responsive" alt="" style="padding-top: 10px;width: 150px;height: 150px;">
+                                    <div class="col-md-3 col-sm-6 outer-profile-holder" id="div-match-{{$user->id}}">
+                                    <!------start------>
+                                    <!------start------>
+<div class="card profile-holder" style="margin-bottom: 2%;" id="profile-display-cards">
+  <img class="card-img-top" src="{{asset('avatars/')}}/{{$user->avatar}}"  id="user-profile-image" style=""
+  alt="Profile Image">
+  <div class="card-body" style="padding: 0px !important;">
+    <p class="card-text text-center" style="margin: 1px !important;">
+        {{ !empty($user->username) ? $user->username : 'No name' }}, <strong>&nbsp;{{$user->age }}&nbsp;</strong>yrs <br>
+
+        <span class="text-info">
+            {{!empty($user->profile->city) ? $user->profile->city->name : ""}}
+            {{!empty($user->profile->country) ? "," . $user->profile->country->name : ""}}
+        </span>
+    </p>
+
+    <div style="text-align: center;padding-bottom: 5px;">
+        <button type="button" class="btn btn-info btn-sm">
+            <a style="color: white;" href="{{route('view-user',['id'=>$user->id])}}"> <i class="fa fa-eye user-information" style="    font-size: 20px;" aria-hidden="true" id="view-more-user-information" title="View profile and interests"
+        ></i></a>
+            
+        </button>
+
+        &nbsp;
+
+        <button type="button" class="btn btn-info btn-sm" onclick="populateAndShowMessageDiv('{{$user->id}}','{{$user->username}}','{{Auth::user()->id}}','{{asset('avatars/')}}/{{$user->avatar}}')" id="send-message-btn">
+        <i class="fa fa-send" title="message {{ !empty($user->username) ? $user->username : '' }}" style="    font-size: 20px;" aria-hidden="true" onclick="">
+
+        </i>
+        </button>
+
+        &nbsp;
+
+        <button type="button" class="btn btn-info btn-sm" onclick="Matchuser('{{Auth::user()->id}}','{{$user->id}}')" id="favorite-user-button">
+<i title="like {{ !empty($user->username) ? $user->username : '' }}" class="fa fa-heart favorite-icon" id="fa-heart-{{$user->id}}" style="font-size: 20px;" aria-hidden="true" onclick=""></i>
+            
+        </button>
+
+        @if(!in_array($user->id, $fav_id_array))
+        <button type="button" class="btn btn-info btn-sm" onclick="addFav('{{Auth::user()->id}}','{{$user->id}}')" id="add_fav_{{$user->id}}">
+            <i title="Add {{ !empty($user->username) ? $user->username : '' }} To Favourites" class="fa fa-thumbs-up" id="fa-heart-{{$user->id}}" style="font-size: 20px;" aria-hidden="true" onclick=""></i>
+
+        </button>
+        @endif
+
+        &nbsp;
 
 
-                                            <div class="post_view" style="display: inline-block;">
-                                                <div>
-                                                    <small class="text-info">{{ !empty($user->username) !==null ? $user->username : 'No name' }}</small>
-                                                </div>
 
-                                                    <i class="fa fa-info-circle user-information" style="    font-size: 25px;margin-right: 5px;" aria-hidden="true" id="view-more-user-information" title="View profile and interests"
-                                                    onclick="showUserInformationOntheModal('{{$user->id}}')"></i>
-
-
-                                                    <i class="fa fa-send" title="message {{ !empty($user->username) !==null ? $user->username : '' }}" style="    font-size: 25px;color: #57a700;margin-right: 5px;" aria-hidden="true" onclick="populateAndShowMessageDiv('{{$user->id}}','{{$user->username}}','{{Auth::user()->id}}')">
-
-                                                        {{-- populateAndShowMessageDiv(receiver_id,receiver_username,sender_id) --}}
-                                                    </i>
-
-                                                    <i title="like {{ !empty($user->username) !==null ? $user->username : '' }}" class="fa fa-heart favorite-icon" id="fa-heart-{{$user->id}}" style="color: {{ $user->match!==null && $user->match->confirmed==1 ? "#ed4956" : "" }};    font-size: 25px;" aria-hidden="true" onclick="Matchuser('{{Auth::user()->id}}','{{$user->id}}')"></i>
-
-                                            </div>
-                                        </div>
+        &nbsp;
+        
+    </div>
+  </div>
+</div>  
+                                    <!-----end of new code------->
+                                    <!-----end of new code------->                                  
                                     </div>
                                     @endforeach
                             @endif
 
                         </div>
-
-                        <div class="row">
-                            {{$users->links()}}
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-3 col-sm-12">
-                        <div class="l_news_item profile-holder">
-                            <h4>Recent Activities</h4>
-                            <hr>
-
-                            <div class="post_view" style="height: 200px;overflow: auto;">
-                                    @if(!empty($all_notifications) && count($all_notifications)>0)
-                                        @foreach($all_notifications as $notif)
-                                        <div style="font-size: 12px;border-bottom:1px solid #d6d5d8;    padding-left: 5px;color: black;padding-bottom: 10px;">
-                                            {{$notif->description}}
-
-                                            
-
-                                            
-
-                                        </div>
-                                        @endforeach
-                                    @else
-                                        <div style="font-size: 12px;border-bottom:1px solid #d6d5d8;    padding-left: 5px;color: black;padding-bottom: 10px;">
-                                            No activities.
-                                        </div>
-
-                                    @endif
+                        <hr>
+                            <div class="row">
+                                {{$users->links()}}
                             </div>
-                        </div>
+
                     </div>
 
         		</div>
         	</div>
 
 <!-- Large modal -->
-        <div class="l_news_item profile-holder" id="message-div"  style="position: fixed;width: 400px;right: 45px;bottom: 0;background: #b1ffdf;padding: 10px !important;display: none;z-index: 99999;">
-            <span><i class="fa fa-user"></i> <span id="receiver_username"></span> </span>
-            <span onclick="HideMessageDiv()" style="float:right; font-size: 20px;"><i class="fa fa-close"></i></span>
 
-            <div class="post_view" style="height: 300px ;overflow: auto; background: #fff; margin-bottom: 10px;padding-top: 20px;"><div style="padding-bottom: 20px;" id="conversation-list"></div></div>
+{{-- new message div --}}
+        <div class="l_news_item" id="message-div">
+            <div style="padding: 4%;">
+                <img src="{{asset('avatars/male-icon.png')}}" class="{{ URL::to('/')}}" width="50" height="50" id="user-profile-image-display" style="border-radius: 50px;">&nbsp;<span id="receiver_username"></span> 
+                <span onclick="HideMessageDiv()" style="float:right; font-size: 20px;">
+                    <i class="fa fa-close"></i>
+                </span>
+            </div>
+
+            <div class="post_view" id="conversation-list-holder">
+                <div id="conversation-list"></div>
+        </div>
 
             <div class="container">
-                <div class="form-group row" style="margin-bottom: 0px;">
+                <div class="form-group row" style="margin-bottom: 2%;padding-left: 2%;">
                     <input type="hidden" id="receiver_id">
                     <input type="hidden" id="sender_id">
-                    <textarea class="form-control col-md-10 col-sm-12" id="sender_message" style="font-size: 12px;padding: 0px ;resize: none;text-indent:10px;" placeholder="Send Message"></textarea>
-                    <div class="col-md-2 col-sm-12">
-                            <button type="button" class="btn btn-default" style="background: #fff;" onclick="SendMessage();">
+                    <textarea class="form-control col-md-10 col-sm-12" id="sender_message" style="" placeholder="Send Message"></textarea>
+                    <div class="col-md-2 col-sm-12" id="send-message-btn-div">
+                            <button type="button" class="btn btn-default" style="background: #fff;" id="btn-send-message" onclick="SendMessage();">
                                 <i class="fa fa-send"></i>
                             </button>
                     </div>
@@ -177,6 +176,7 @@
 
             </div>
         </div>
+{{-- new message div --}}
 
 {{-- modal --}}
 <!-- Modal -->
@@ -192,49 +192,13 @@
           <div class="panel-heading">
           </div>
           <div class="panel-body">
-            <table class="table" style="width: 100%;" id="display-information-table">
-{{--                 <tr>
-                    <td style="padding: 5px !important;border-top: 0px !important;">Name</td>
-                    <td style="padding: 5px !important;border-top: 0px !important;">Peter Kariuki Mutuura</td>
-                </tr>
-                <tr>
-                    <td style="padding: 5px !important;">Age</td>
-                    <td style="padding: 5px !important;">25 Years</td>
-                </tr>
-                <tr>
-                    <td style="padding: 5px !important;">Phone Number</td>
-                    <td style="padding: 5px !important;">25 Years</td>
-                </tr>
-                <tr>
-                    <td style="padding: 5px !important;">Email</td>
-                    <td style="padding: 5px !important;">peterkariukimutuura@gmail.com</td>
-                </tr>
-                <tr>
-                    <td style="padding: 5px !important;">Current Location</td>
-                    <td style="padding: 5px !important;">Nairobi, Kenya</td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="padding: 5px !important; text-align: center;background: #dedede;">Interests</td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="padding: 5px !important;">
-                        <span>Coding</span>, <span>Community Development</span>, <span>Community Enrichment</span>, <span>Teaching</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="padding: 5px !important;text-align: center;background: #dedede;">Hobbies</td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="padding: 5px !important;">
-                        <span>Coding</span>, <span>Community Development</span>, <span>Community Enrichment</span>, <span>Teaching</span>
-                    </td>
-                </tr> --}}
-            </table>
+            <table class="table" style="width: 100%;" id="display-information-table"></table>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" onclick="ReportUser()" class="btn btn-danger btn-sm" id="report-user" class="">Report</Button>
       </div>
     </div>
   </div>
@@ -244,8 +208,61 @@
         </section>
         @include('partials.footer')
         <script type="text/javascript">
+
+            function addFav(logged_in_user, recipient)
+            {
+                let user = logged_in_user;
+                let fav = recipient;
+                let my_button = '#add_fav_'+fav;
+                $(my_button).hide();
+
+                $.ajax({
+
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+
+                    type:'POST',
+
+                    data:{user:user, fav:fav},
+
+                    url: '{{route('user-add-fav')}}',
+
+                    success:function(response){
+                        PNotify.removeAll();
+                        if(response.status=='success'){
+                            // new PNotify({
+                            //     text: response.message,
+                            //     animate_speed: 'fast',
+                            //     type: 'success'
+                            // });
+
+                        }
+
+                    },
+
+                    error:function(response){
+                        new PNotify({
+                            text: 'Error occurred , try again later',
+                            animate_speed: 'fast',
+                            type: 'info'
+                        });
+                    }
+
+                });
+
+
+            }
             function SendMessage(){
+                $("button#btn-send-message").addClass('disabled');
                 PNotify.removeAll();
+
+                new PNotify({
+                    text: "Sending Message..." ,
+                    animate_speed: 'fast',
+                    type: 'success'
+                });
+
                 $("textarea#sender_message").css('border-color','#ccc');
                 var receiver_id = $("input#receiver_id").val();
                 var sender_id = $("input#sender_id").val();
@@ -273,6 +290,8 @@
                             url: '{{route('user-send-message')}}',
 
                             success:function(response){
+                                PNotify.removeAll();
+                                $("button#btn-send-message").removeClass('disabled');
                                  console.log(response);
 
                                 if(response.status=='success'){
@@ -287,7 +306,7 @@
 
                                     var user_conversation=response.user_conversation;
 
-                                    returnUserCoversationList(user_conversation);
+                                    returnUserCoversationList(user_conversation,sender_id);
 
                                 }
 
@@ -331,53 +350,28 @@
                 }
 
             }
+            function ReportUser(){
+                PNotify.removeAll();
+                    new PNotify({
+                        text: "Work on progress.",
+                        animate_speed: 'fast',
+                        type: 'info'
+                    });
+            }
 
             function returnUnreadMessageCount(user_id){
 
 
             }
-            function returnUserCoversationList(conversations){
-                console.log(conversations);
-                if (conversations.length>0) {
-                    var str="";
-                    for (var i = conversations.length - 1; i >= 0; i--) {
-                        var str1 ="";
-                        if (conversations[i].user.id=='{{Auth::user()->id}}') {
-                         str1 +=`<li style="list-style: none; text-indent: 10px;">
-                                <small>${conversations[i].text}</small><span style="margin-left: 10px;font-size: 10px;margin-right: 7px;color: #54c185;">${conversations[i].created_at}</span>`;
 
-                        }else{
-                                str1+=`
-                                <ul style="margin-bottom:1px !important;">
-                                    <li style="list-style: none;background: #e6fbf5; padding-left: 30px;border-radius: 25px;">
-                                        <small>${conversations[i].text}</small>
-                                        <span style="font-size: 10px;margin-left: 10px;color: #eab38d;">${conversations[i].created_at}</span>
-                                    </li>
-                                </ul>
-                            </li>`.trim();
-
-                        }
-
-                            str+=str1;
-                    }
-
-                    $("div#conversation-list").html(str);
-                    $("#conversation-list").scrollTop($('#conversation-list')[0].scrollHeight)
-
-                }else{
-                $("div#conversation-list").html(`<small style="margin-left:20%;">No conversations added.</small>`);
-                }
-                $("div#message-div").show();
-
-            }
             function Matchuser(logged_in_user,match_id){
                 PNotify.removeAll();
                 if (logged_in_user!==null && match_id!==null) {
-                    new PNotify({
-                        text: "Sending match Request.",
-                        animate_speed: 'fast',
-                        type: 'info'
-                    });
+                    // new PNotify({
+                    //     text: "Sending match Request.",
+                    //     animate_speed: 'fast',
+                    //     type: 'info'
+                    // });
                     $.ajax({
 
                         headers: {
@@ -396,21 +390,21 @@
 
                                 $("#fa-heart-"+match_id).css('color','#3654ee');
 
-                                new PNotify({
-                                    text: response.message,
-                                    animate_speed: 'fast',
-                                    type: 'success'
-                                });
+                                // new PNotify({
+                                //     text: response.message,
+                                //     animate_speed: 'fast',
+                                //     type: 'success'
+                                // });
 
                             }
 
 
                             if(response.status=='info'){
-                                new PNotify({
-                                    text: response.message,
-                                    animate_speed: 'fast',
-                                    type: 'info'
-                                });
+                                // new PNotify({
+                                //     text: response.message,
+                                //     animate_speed: 'fast',
+                                //     type: 'info'
+                                // });
                             }
 
                         },
@@ -434,8 +428,8 @@
                     });
                 }
             }
-            function fecthCoversations(sender,receiver){
-                console.log('sender ',sender, '  receiver' ,receiver);
+            function fetchCoversations(sender,receiver){
+                // console.log('sender ',sender, '  receiver' ,receiver);
                 PNotify.removeAll();
                 if (sender!=="" && receiver!=="") {
                     $.ajax({
@@ -451,29 +445,24 @@
                         url: '{{ route('user-get-convesations')}}',
 
                         success:function(response){
-                            console.log(response);
+                            // console.log(response);
                             PNotify.removeAll();
                             var user_conversations =response.user_conversations;
 
                             if (response.confirmed=="false") {
                                 if (response.match_request_status=="pending") {
-                                    new PNotify({
-                                        text: 'You match request is awaiting confirmation',
-                                        animate_speed: 'fast',
-                                        type: 'info'
-                                    });
+                                    // new PNotify({
+                                    //     text: 'You match request is awaiting confirmation',
+                                    //     animate_speed: 'fast',
+                                    //     type: 'info'
+                                    // });
                                 }else{
-                                    new PNotify({
-                                        text: 'Kindly send a match request first!',
-                                        animate_speed: 'fast',
-                                        type: 'info'
-                                    });
 
                                 }
                             }
 
+                            returnUserCoversationList(user_conversations,sender);
                             if (response.confirmed=="true") {
-                                    returnUserCoversationList(user_conversations);
                             }
 
                         },
@@ -551,53 +540,11 @@
                 }
             }
 
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('#upfile1').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-            $(document).ready(function(){
-                $("input#file1").hover(function(){
-                    $("#upload-profile-image").show();
-                },function(){
-                   $("#upload-profile-image").hide();
-                });
-            });
-            $("#file1").change(function(){
-                readURL(this);
-            });
 
 
 
-            function populateAndShowMessageDiv(receiver_id,receiver_username,sender_id){
-                console.log('sender_id ',sender_id, '  receiver' ,receiver_id);
-                $("div#message-div").hide();
-                if (receiver_id!==""&&sender_id!=="") {
-                    receiver_username = receiver_username!==""? receiver_username : 'User';
-                    $("input#receiver_id").val(receiver_id);
-                    $("input#sender_id").val(sender_id);
-                    $("textarea#message").val("");
-                    $("span#receiver_username").html(receiver_username);
-
-                    fecthCoversations(sender_id,receiver_id);
 
 
-
-                }
-            }
-            function HideMessageDiv(){
-                $("span#receiver_username").html("User");
-                $("input#receiver_id").val("");
-                $("input#sender_id").val("");
-                $("textarea#sender_message").val("");
-                $("div#message-div").hide();
-
-            }
 
             function showUserInformationOntheModal(id){
                  PNotify.removeAll();
@@ -734,11 +681,11 @@ function ConfirmMatch(notification_type,match_id,notification_id){
             if(response.status=='success'){
 
               
-                new PNotify({
-                    text: response.message,
-                    animate_speed: 'fast',
-                    type: 'success'
-                });
+                // new PNotify({
+                //     text: response.message,
+                //     animate_speed: 'fast',
+                //     type: 'success'
+                // });
 
                 $("button_not_confirmed_"+notification_id).hide();
                 $("button_confirmed_"+notification_id).show();
@@ -812,7 +759,7 @@ function SearchUser(logged_in_user_id){
                   var str1 =`
                       <div class="col-md-4 col-sm-4" id="div-match-${data[i].id}">
                           <div class="l_news_item member-profile-holder" style="text-align: center;margin-bottom: 5px;">
-                                  <img src="http://localhost:8000/avatars/${data[i].avatar}" class="img-responsive" alt="" style="padding-top: 10px;width: 150px;height: 150px;">
+                                  <img src="http://157.230.101.229/wn/avatars/${data[i].avatar}" class="img-responsive" alt="" style="padding-top: 10px;width: 150px;height: 150px;">
 
 
                               <div class="post_view" style="display: inline-block;">
@@ -874,7 +821,22 @@ function SearchUser(logged_in_user_id){
 // SearchUser
 
 
-
+ function doSomeWindowAdjustments(){
+    if ($(window).width()<=1024 && $(window).width() >=425) {
+       $('.outer-profile-holder').removeClass('col-md-3');
+       $('.outer-profile-holder').addClass('col-md-4');
+    }else{
+       $('.outer-profile-holder').addClass('col-md-3');
+       $('.outer-profile-holder').removeClass('col-md-4');
+    }
+    if ($(window).width()<=800 && $(window).width() >=425) {
+       $('.outer-profile-holder').removeClass('col-md-3');
+       $('.outer-profile-holder').addClass('col-md-6');
+    }else{
+       $('.outer-profile-holder').addClass('col-md-3');
+       $('.outer-profile-holder').removeClass('col-md-6');
+    }
+ }
 
 
         </script>

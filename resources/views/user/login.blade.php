@@ -37,8 +37,8 @@
         <!--================Header Menu Area =================-->
 
         <!--================Latest News Area =================-->
-        <section class="latest_news_area p_120" style="background-image:url('{{ asset('temp/img/banner/smiling.jpg') }}');background-position: top;">
-            <div class="container">
+        <section class="latest_news_area p_120" style="background-image:url('{{ asset('temp/img/banner/smiling.jpg') }}');background-position: center;">
+            <div class="container" style="margin-bottom: 10%;margin-top: 10%;">
                 <div class="latest_news_inner row">
                     <div class="col-md-6 col-sm-12">
                         <div class="l_news_item" style="">
@@ -59,8 +59,12 @@
                               <div class="row">
                                     <button type="submit" class="btn btn-success btn-sm col-md-4 col-sm-12 pull-left" type="button" id="btn-login" >Login &nbsp;<i class="spinner" id="spinner-login" style="display: none;"></i></button>
                               </div>
-                              <div class="row">
-                                  <a href="{{ route('user-register') }}" style="margin-top: 3%;">Or Create Account </a>
+                              <div class="row" style="margin-top: 2%;">
+                                  <a href="{{ route('user-register') }}" title="register for a new account."> Create Account </a> 
+                                  <span style="margin-left: 1%;margin-right: 1%;">||</span>
+                                  <a href="{{ route('user-password-reset') }}" title="Forgot account password, follow this link.">Recover account password ? </a>
+                                  {{-- <p>{{config('app.url')}}</p> --}}
+                                  
                               </div>
                             </form>
                             
@@ -129,7 +133,7 @@
                             window.location.href="{{route('user-dashboard')}}";
                           }
                           if (response.code==2) {
-                            window.location.href="/admin/dashboard";
+                            window.location.href="{{route('admin-dashboard')}}";
                           }
 
                         }

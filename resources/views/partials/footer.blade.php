@@ -55,63 +55,75 @@
 
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="{{ asset('temp/js/jquery-3.2.1.min.js') }}"></script>
-        <script src="{{ asset('temp/js/popper.js') }}"></script>
-        <script src="{{ asset('temp/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('temp/js/stellar.js') }}"></script>
-        <script src="{{ asset('temp/vendors/lightbox/simpleLightbox.min.js') }}"></script>
-        <script src="{{ asset('temp/vendors/isotope/imagesloaded.pkgd.min.js') }}"></script>
-        <script src="{{ asset('temp/vendors/isotope/isotope-min.js') }}"></script>
-        <script src="{{ asset('temp/vendors/owl-carousel/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('temp/js/jquery.ajaxchimp.min.js') }}"></script>
-        <script src="{{ asset('temp/vendors/counter-up/jquery.waypoints.min.js') }}"></script>
-        <script src="{{ asset('temp/vendors/counter-up/jquery.counterup.js') }}"></script>
-        <script src="{{ asset('temp/js/mail-script.js') }}"></script>
-        <script src="{{ asset('temp/vendors/popup/jquery.magnific-popup.min.js') }}"></script>
-        <script src="{{ asset('temp/js/theme.js') }}"></script>
-        <script src="{{ asset('js/pnotify.custom.min.js') }}"></script>
-        <script src="{{ asset('js/main.js') }}"></script>
-        <script src="{{ asset('js/custom-main.js') }}"></script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{{ asset('temp/js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('temp/js/popper.js') }}"></script>
+<script src="{{ asset('temp/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('temp/js/stellar.js') }}"></script>
+<script src="{{ asset('temp/vendors/lightbox/simpleLightbox.min.js') }}"></script>
+<script src="{{ asset('temp/vendors/isotope/imagesloaded.pkgd.min.js') }}"></script>
+<script src="{{ asset('temp/vendors/isotope/isotope-min.js') }}"></script>
+<script src="{{ asset('temp/vendors/owl-carousel/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('temp/js/jquery.ajaxchimp.min.js') }}"></script>
+<script src="{{ asset('temp/vendors/counter-up/jquery.waypoints.min.js') }}"></script>
+<script src="{{ asset('temp/vendors/counter-up/jquery.counterup.js') }}"></script>
+<script src="{{ asset('temp/js/mail-script.js') }}"></script>
+<script src="{{ asset('temp/vendors/popup/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('temp/js/theme.js') }}"></script>
+<script src="{{ asset('js/pnotify.custom.min.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/custom-main.js') }}"></script>
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 
-        <script>
-        @if(Session::has('message'))
+<script>
+    @if(Session::has('message'))
 
-        var type = "{{ Session::get('status', 'info') }}";
-          
-      switch(type){
-          case 'info':
-                new PNotify({
-                    text: '{{ Session::get('message') }}',
-                    animate_speed: 'fast',
-                    type: 'info'
-                });
-              break;
+    var type = "{{ Session::get('status', 'info') }}";
 
-          case 'warning':
-                new PNotify({
-                    text: '{{ Session::get('message') }}',
-                    animate_speed: 'fast',
-                    type: 'warning'
-                });
-              break;
+    switch(type){
+    case 'info':
+        new PNotify({
+            text: '{{ Session::get('message') }}',
+            animate_speed: 'fast',
+            type: 'info'
+        });
+      break;
 
-          case 'success':
-                new PNotify({
-                    text: '{{ Session::get('message') }}',
-                    animate_speed: 'fast',
-                    type: 'success'
-                });
-              break;
+    case 'warning':
+        new PNotify({
+            text: '{{ Session::get('message') }}',
+            animate_speed: 'fast',
+            type: 'warning'
+        });
+      break;
 
-          case 'error':
-                new PNotify({
-                    text: '{{ Session::get('message') }}',
-                    animate_speed: 'fast',
-                    type: 'error'
-                });
-              break;
-       }
-        @endif
-        </script>
+    case 'success':
+        new PNotify({
+            text: '{{ Session::get('message') }}',
+            animate_speed: 'fast',
+            type: 'success'
+        });
+      break;
+
+    case 'error':
+        new PNotify({
+            text: '{{ Session::get('message') }}',
+            animate_speed: 'fast',
+            type: 'error'
+        });
+      break;
+    }
+    @endif
+
+function SendEmailVerificationLink (user) {
+  console.log(user);
+}
+
+</script>
+
+<?php Session::pull('status'); ?>
+<?php Session::pull('message'); ?>
+
+
+

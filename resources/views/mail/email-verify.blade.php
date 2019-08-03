@@ -11,23 +11,22 @@
 					<table class="inner" width="100%" cellpadding="10" cellspacing="0" style="border-collapse:collapse;" >
 						<tr>
 							<td style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;" >
-								<div class="h1" style="font-family:arial;font-size:24px;color:#333333;line-height:1.2em;text-align:left;" >Dating App</div>
-								<p style="font-family:arial;color:#333333;line-height:1.4em;text-align:left;margin-top:1em;margin-bottom:1em;margin-right:0;margin-left:0;" >Hello  {{$recipient}} ,{{$initiator}} sent you a message.
-			Login to your DatingApp and send your reply.</p>
+								<div class="h1" style="font-family:arial;font-size:24px;color:#333333;line-height:1.2em;text-align:left;" >Hello there </div>
+								<p style="font-family:arial;color:#333333;line-height:1.4em;text-align:left;margin-top:1em;margin-bottom:1em;margin-right:0;margin-left:0;" >Welcome to the <strong>Dating App</strong> community. We are very happy to have you join us. Kindly visit this link and verify your account.</p>
 								<div align="left">
 
 									<div class="button" style="max-width:150px;width:100%;display:inline-block;vertical-align:top;" >
 										<table width="100%" cellpadding="10" cellspacing="0" style="border-collapse:separate !important;border-width:5px;border-style:solid;border-color:#ffffff;" >
 											<tr>
 												<td style="text-align: center;font-family: arial;font-size: 14px;    padding: 0px !important;">
-													<a href="{{ env('APP_URL') }}" target="_blank" style="color:#ffffff !important;text-decoration:none;background-color: green;cursor: pointer;    padding: 10px;padding-left: 20px;padding-right: 20px;" ><span style="color:#ffffff;" >Click here</span></a>
+													<a href="{{$url}}" target="_blank" style="color:#ffffff !important;text-decoration:none;background-color: green;cursor: pointer;    padding: 10px;padding-left: 20px;padding-right: 20px;" ><span style="color:#ffffff;" >Click here</span></a>
 												</td>
 											</tr>
 										</table>
 									</div>
 
 								</div>
-							<p style="font-family:arial;color:#333333;line-height:1.4em;text-align:left;margin-top:1em;margin-bottom:1em;margin-right:0;margin-left:0;" > or you can copy and paste this link on your browser <a href="{{ env('APP_URL') }}">{{ env('APP_URL') }}</a>.</p>	
+							<p style="font-family:arial;color:#333333;line-height:1.4em;text-align:left;margin-top:1em;margin-bottom:1em;margin-right:0;margin-left:0;" > or you can copy and paste this link on your browser <a href="{{$url}}">{{$url}}</a>.</p>
 							</td>
 						</tr>
 					</table>

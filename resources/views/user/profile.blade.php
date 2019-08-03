@@ -28,164 +28,171 @@
 <section class="latest_news_area p_120">
     <div class="container">
     <div class="row">
-        <div class=" l_news_item col-md-10 main-holder ">
+        <div class=" l_news_item col-md-10 col-sm-12" style="margin: auto;">
             <div class="row">
                 <div class="col-md-4 main-profile-holder">
-           <h3 class="aside-header"><a href="{{route('edit-profile')}}">Edit Profile</a></h3>
-            <img src="{{asset('avatars/')}}/{{Auth::user()->avatar}}" alt="" style="width: 200px;height: 200px;">
+                <h3 class="aside-header"><a href="{{route('edit-profile')}}">My Profile</a></h3>
+
+                    <img src="{{asset('avatars/')}}/{{Auth::user()->avatar}}" alt="" style="width: 200px;height: 200px;">
+                    <h5 style="color: black;">{{Auth::user()->username}}</h5>
+
+                    <a class="attribute-title" style="display: block;" href="{{route('edit-profile')}}" title="Edit Profile">Update profile</a>
+                    
                 </div>
-                <div class="col-md-4">
-                    <h4>{{Auth::user()->username}}</h4>
-                    <p>Age : {{Auth::user()->age}}</p>
-                    <hr>
-                    <p class="gender-p">{{Auth::user()->gender}} / Single</p>
-                    <hr>
-                    @if(isset(Auth::user()->profile))
-                    <p class="gender-p">{{Auth::user()->profile->country->name}} </p>
-                        @endif
-                    <hr>
-                    <p clas="gender-p">Seeking :</p>
-                    <hr>
-                    <p clas="gender-p">Last Active :    </p>
+                <div class="col-md-4 col-sm-12 user-basics1">
+                    <h5 style="text-align: center;">Basic Information</h5>
+                    <table class="userPropertiesTable">
+                        <tr>
+                            <td class="userProperties">Age</td>
+                            <td>{{Auth::user()->age}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Phonenumber</td>
+                            <td>{{Auth::user()->phonenumber}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Email</td>
+                            <td>{{Auth::user()->email}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Gender</td>
+                            <td>{{Auth::user()->gender}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Interested In</td>
+                            <td>{{ isset(Auth::user()->seeking) ? Auth::user()->seeking->name : "Not set!" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">city</td>
+                            <td>{{ isset(Auth::user()->profile->city) ? Auth::user()->profile->city->name :"Not set!"}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Country</td>
+                            <td>{{ isset(Auth::user()->profile->country) ? Auth::user()->profile->country->name :"Not set!"}}</td>
+                        </tr>
+                    </table>
                 </div>
 
-            <div class="col-md-4  scrollable">
+            <div class="col-md-4">
                 @if(count($users)>0)
+                <h6 class="aside-header">People You may know</h6>
+                <div class="scrollable" style="width: 100%">
                     <aside class="single_sidebar_widget popular_post_widget">
-                        <h6 class="aside-header">People You may know</h6>
-
-                        {{-- <div class="row member-holder"> --}}
                         @foreach($users as $user)
-                            <div  id="div-match-{{$user->id}}">
-                                <div class="l_news_item member-profile-holder" style="text-align: center;margin-bottom: 5px;">
-                                    <img src="{{asset('avatars/')}}/{{$user->avatar}}" class="img-responsive" alt="" style="padding-top: 10px;width: 150px;height: 150px;">
+                            <div class="card" style="margin-bottom: 2%;" id="profile-display-cards">
+                                <img src="{{asset('avatars/')}}/{{$user->avatar}}"  id="user-profile-image" style="max-height: 255px;"alt="Profile Image">
+                                <div class="card-body" style="padding: 0px !important;">
+                                    <p class="card-text text-center" style="margin: 1px !important;">
+                                        {{ !empty($user->username) ? $user->username : 'No name' }}, <i>&nbsp;{{$user->age }}&nbsp;yrs</i>
+                                    </p>
 
-                                    <div class="post_view" style="display: inline-block;">
-                                        <div>
-                                            <small class="text-info">{{ !empty($user->username) !==null ? $user->username : 'No name' }}</small>
-                                        </div>
+                                    <div style="text-align: center;padding-bottom: 5px;">
+                                        <button type="button" class="btn btn-info btn-sm">
+                                            <a style="color: white;" href="{{route('view-user',['id'=>$user->id])}}"> <i class="fa fa-eye user-information" style="    font-size: 20px;" aria-hidden="true" id="view-more-user-information" title="View profile and interests"
+                                                ></i></a>
 
-                                        <i class="fa fa-info-circle" style="font-size: 20px;margin-right: 5px;" aria-hidden="true" id="view-more-user-information" title="View profile and interests"
-                                           onclick="showUserInformationOntheModal()"></i>
-                                        <i class="fa fa-send" title="Send Message" style="font-size: 20px;color: #57a700;margin-right: 5px;" aria-hidden="true" onclick="populateAndShowMessageDiv('{{$user->id}}','{{$user->username}}','{{Auth::user()->id}}')">
-                                        </i>
+                                        </button>
 
-                                        <i class="fa fa-heart" id="fa-heart-{{$user->id}}" style="color: {{ !empty($user->match) &&
-                                                        $user->match->initator == Auth::user()->id ? '#ed4956' :''  }};font-size: 20px;" aria-hidden="true" onclick="Matchuser('{{Auth::user()->id}}','{{$user->id}}')"></i>
+                                        &nbsp;
+
+                                        <button type="button" class="btn btn-info btn-sm" onclick="populateAndShowMessageDiv('{{$user->id}}','{{$user->username}}','{{Auth::user()->id}}')" id="send-message-btn">
+                                            <i class="fa fa-send" title="message {{ !empty($user->username) ? $user->username : '' }}" style="    font-size: 20px;" aria-hidden="true" onclick=""></i>
+                                        </button>
+
+                                        &nbsp;
+
+                                        <button type="button" class="btn btn-info btn-sm" onclick="Matchuser('{{Auth::user()->id}}','{{$user->id}}')" id="favorite-user-button">
+                                            <i title="like {{ !empty($user->username) ? $user->username : '' }}" class="fa fa-heart favorite-icon" id="fa-heart-{{$user->id}}" style="font-size: 20px;" aria-hidden="true" onclick=""></i>
+
+                                        </button>
+
+                                        &nbsp;
+
+
+
+                                        &nbsp;
 
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        {{-- </div> --}}
-                        @endif
                     </aside>
+                    
+                </div>
+                @endif
 
 
             </div>
 
         </div>
-            <hr>
-
-            <div class="row attribute-title">
-
-                <div class="col-md-12">
-                     <div class="row header"><h4> Member Overview</h4>  <hr></div>
-
+        <div class="row">
+                <div class="col-md-4 col-sm-12 user-basics">
+                    <h5 style="text-align: center;">Appearance</h5>
+                    <table class="userPropertiesTable">
+                        <tr>
+                            <td class="userProperties">Hair Color</td>
+                            <td>{{isset(Auth::user()->profile->hairColor)?Auth::user()->profile->hairColor->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Hair Length</td>
+                            <td>{{isset(Auth::user()->profile->hairLength)?Auth::user()->profile->hairLength->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Hair Type</td>
+                            <td>{{isset(Auth::user()->profile->hairType)?Auth::user()->profile->hairType->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Eye Color</td>
+                            <td>{{isset(Auth::user()->profile->eyeColor)?Auth::user()->profile->eyeColor->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Heigth</td>
+                            <td>{{isset(Auth::user()->profile->height)?Auth::user()->profile->height->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Eye Wear</td>
+                            <td>{{isset(Auth::user()->profile->eyeWear)?Auth::user()->profile->eyeWear->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Weight</td>
+                            <td>{{isset(Auth::user()->profile->weight)?Auth::user()->profile->weight->name:'Not Set'}}</td>
+                        </tr>
+                    </table>
                 </div>
-            </div>
-            <div class="row">
-
-                <div class="col-md-12 attribute-content-holder">
-                    <p>Phenomenal</p>
-
+                <div class="col-md-4 col-sm-12 user-basics">
+                    <h5 style="text-align: center;">Appearance</h5>
+                    <table class="userPropertiesTable">
+                        <tr>
+                            <td class="userProperties">Ethinicity</td>
+                            <td>{{isset(Auth::user()->profile->ethnicity)?Auth::user()->profile->ethnicity->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Complexion</td>
+                            <td>{{isset(Auth::user()->profile->complexion)?Auth::user()->profile->complexion->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Body Type</td>
+                            <td>{{isset(Auth::user()->profile->bodyType)?Auth::user()->profile->bodyType->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Facial Hair</td>
+                            <td>{{isset(Auth::user()->profile->facialHair)?Auth::user()->profile->facialHair->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Best Feature</td>
+                            <td>{{isset(Auth::user()->profile->bestFeature)?Auth::user()->profile->bestFeature->name:'Not Set'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="userProperties">Body Art</td>
+                            <td>{{isset(Auth::user()->profile->bodyArt)?Auth::user()->profile->bodyArt->name:'Not Set'}}</td>
+                        </tr>
+                    </table>
                 </div>
-            </div>
-            <div class="row attribute-title">
-
-                <div class="col-md-6">
-                    <div class="row header"><h4> About {{Auth::user()->username}}</h4>  <hr></div>
-
+                <div class="col-md-4 col-sm-12 user-basics">
+                    <!---<h5 style="text-align: center;">Life Style</h5>-->
                 </div>
-                <div class="col-md-6">
-                    @if(Auth::user()->gender=='male')
-                    <div class="row header"><h4>He's  Looking For</h4>  <hr></div>
-                        @else
-                        <div class="row header"><h4>She's  Looking For</h4>  <hr></div>
-                        @endif
+        </div>
 
-
-                </div>
-
-
-            </div>
-            <hr>
-            <div class="row">
-
-                <div class="col-md-12 ">
-                   <h3>Basic</h3>
-
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="row">
-                      <div class="col-md-6">
-                          <h6>Gender</h6>
-                      </div>
-                        <div class="col-md-6">
-                            @if(Auth::user()->gender=='male')
-                                <p>Male</p>
-                                @else
-                            <p>Female</p>
-                                @endif
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            @if(Auth::user()->gender=='male')
-                                <p>Female</p>
-                            @else
-                                <p>Male</p>
-                                @endif
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6>Age</h6>
-                        </div>
-                        <div class="col-md-6">
-                           <p>{{Auth::user()->age}}</p>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
 
 
         </div>
@@ -195,5 +202,9 @@
 
 </section>
 @include('partials.footer')
+<script type="text/javascript">
+
+
+</script>
 </body>
 </html>

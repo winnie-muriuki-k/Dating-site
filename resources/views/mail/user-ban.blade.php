@@ -21,8 +21,10 @@
 	<div>
 		<h1>Dating App</h1>
 		<p>
-		Hello , {{$recipient}} ,you have a pending match request from {{$initiator}}.
-			Login to your DatingApp and approve it.
+		Hello {{$username}}, You Dating App account has been {{$action}} .The following reasons have been provided.<hr>
+		{{$userMessage}}
+		<hr>
+		Kindly contact support for any inquiries.
 		</p>
 	</div>
 </body>

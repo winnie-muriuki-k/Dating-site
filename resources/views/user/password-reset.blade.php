@@ -37,8 +37,8 @@
         <!--================Header Menu Area =================-->
 
         <!--================Latest News Area =================-->
-        <section class="latest_news_area p_120" style="background-image:url('{{ asset('temp/img/banner/smiling.jpg') }}');background-position: top;">
-            <div class="container">
+        <section class="latest_news_area p_120" style="background-image:url('{{ asset('temp/img/banner/smiling.jpg') }}');background-position: center;">
+            <div class="container" style="margin-bottom: 10%;margin-top: 10%;">
                 <div class="latest_news_inner row">
                     <div class="col-md-6 col-sm-12">
                         <div class="l_news_item" style="">
@@ -53,11 +53,13 @@
                               <div class="form-group row">
                                 <label for="email" class="col-sm-4 col-form-label" style="opacity: 0;">Email</label>
                                 <div class="col-sm-8">
-                                    <button class="btn btn-primary btn-sm" style="width: 100%;" type="button" id="btn-password-reset" onclick="PasswordReset()">Get Password Reset Link &nbsp;<i class="spinner" id="spinner-password-reset" style="display: none;"></i></button>
+                                    <button class="btn btn-success btn-sm" style="width: 100%;" type="button" id="btn-password-reset" onclick="PasswordReset()">Get Password Reset Link &nbsp;<i class="spinner" id="spinner-password-reset" style="display: none;"></i></button>
                                 </div>
                               </div>
                               <div class="row">
-                                  <a href="{{ route('user-login') }}" style="margin-top: 3%;">Or login </a>
+                                  <a href="{{ route('user-login') }}" title="Login to account."> Got to login.  </a> 
+                                  <span style="margin-left: 1%;margin-right: 1%;">||</span>
+                                  <a href="{{ route('user-register') }}" title="register for a new account.">or create account. </a>
                               </div>
                             </form>
                             

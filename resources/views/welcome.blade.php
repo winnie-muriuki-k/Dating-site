@@ -7,7 +7,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" href="{{ asset('img/favicon.png') }}" type="image/png">
-        <title>BulkApp</title>
+        <title>Dating App</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{ asset('temp/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('temp/vendors/linericon/style.css') }}">
@@ -20,6 +20,7 @@
         <!-- main css -->
         <link rel="stylesheet" href="{{ asset('temp/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('temp/css/responsive.css') }}">
+                <link rel="stylesheet" href="{{ asset('css/main.css') }}">
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/pnotify.custom.min.css') }}">
     </head>
     <body data-spy="scroll" data-target="#mainNav" data-offset="70">
@@ -33,7 +34,7 @@
             <div class="banner_inner">
 				<div class="container">
 					<div class="row banner_content" >
-						<div class="col-lg-4" style="background: #bf83f7;padding: 20px;">
+						<div class="col-lg-4" style="background: #9a9e9a;padding: 20px;">
                                 <form id="login-form-home">
                                         <h1>Sign In</h1>
                                         <div class="form-group">
@@ -46,15 +47,19 @@
                                         </div>
 
 
-                                        <button type="button" class="btn btn-outline-default" style="outline: none; border-radius: 0px !important" id="btn-login-home" onclick="loginForm()">Login &nbsp;<i class="spinner" id="spinner-login-form" style="display: none;"></i></button>
+                                        <button type="button" class="btn btn-success" style="outline: none; border-radius: 0px !important;width: 200px;" id="btn-login-home" onclick="loginForm()">Login &nbsp;<i class="spinner" id="spinner-login-form" style="display: none;"></i></button>
                                         <hr/>
-                                        <p class="message">Not registered? <a href="{{ route('user-register') }}" style="color:black;">Create an account</a></p>
+                                        <div>
+                                          <a href="{{ route('user-register') }}" style="color: black;" title="register for a new account."> Create Account </a> 
+                                          <span style="margin-left: 1%;margin-right: 1%;">||</span>
+                                          <a href="{{ route('user-password-reset') }}" style="color: black;" title="recover account password">Forgot Password ? </a>
+                                        </div>
                                     </form>
 						</div>
 						<div class="col-lg-8">
 							<div class="banner_map_img">
-                            </div>
-                            <h2 style="position:absolute; bottom:0px; right:0px; color:#9047d2;">Come find your soul mate</h2>
+                            </div>  
+                            <h2 style="text-align: center;margin-top: 20%;   color:#5df7a1;">Come find your soul mate</h2>
 						</div>
 					</div>
 				</div>
@@ -67,7 +72,7 @@
         	<div class="container">
         		<div class="main_title">
         			<h2>Unique Features</h2>
-        			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
+        			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do ei</p>
         		</div>
         		<div class="feature_inner row">
         			<div class="col-lg-3 col-md-6">
@@ -114,7 +119,7 @@
         				<div class="interior_text">
         					<h4>We Believe that Interior beautifies the Total Architecture</h4>
         					<p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed off.</p>
-        					<a class="main_btn" href="#">See Details</a>
+        					<a class="btn btn-success" href="#">See Details</a>
         				</div>
         			</div>
         		</div>
@@ -130,7 +135,7 @@
         				<div class="interior_text">
         					<h4>We Believe that Interior beautifies the Total Architecture</h4>
         					<p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed off.</p>
-        					<a class="main_btn" href="#">See Details</a>
+        					<a class="btn btn-success" href="#">See Details</a>
         				</div>
         			</div>
         			<div class="col-lg-6">
@@ -148,7 +153,7 @@
         <!--================End Interior Area =================-->
 
         <!--================Price Area =================-->
-        <section class="price_area p_120" id="price">
+{{--         <section class="price_area p_120" id="price">
         	<div class="container">
         		<div class="main_title">
         			<h2>Pricing Table</h2>
@@ -232,7 +237,7 @@
         			</div>
         		</div>
         	</div>
-        </section>
+        </section> --}}
         <!--================End Price Area =================-->
 
         <!--================Feature Area =================-->
@@ -302,7 +307,7 @@
         <!--================End Testimonials Area =================-->
 
         <!--================Download App Area =================-->
-        <section class="download_app_area p_120">
+{{--         <section class="download_app_area p_120">
         	<div class="container">
         		<div class="app_inner">
         			<h2>Download This App Today!</h2>
@@ -333,11 +338,11 @@
         			</div>
         		</div>
         	</div>
-        </section>
+        </section> --}}
         <!--================End Download App Area =================-->
 
         <!--================Latest News Area =================-->
-        <section class="latest_news_area p_120">
+{{--         <section class="latest_news_area p_120">
         	<div class="container">
         		<div class="main_title">
         			<h2>Latest News</h2>
@@ -382,7 +387,7 @@
         			</div>
         		</div>
         	</div>
-        </section>
+        </section> --}}
         <!--================End Latest News Area =================-->
 
         <!--================ start footer Area  =================-->
@@ -438,17 +443,15 @@
                     url: '{{route('process-user-login')}}',
 
                     success:function(response){
-                        $("#spinner-login").hide();
                         $("#spinner-login-form").hide();
 
-                         $("#btn-login").removeClass("disabled");
                          $("#btn-login-home").removeClass("disabled");
                         if(response.status=='success'){
                           if (response.code==1) {
                             window.location.href="{{route('user-dashboard')}}";
                           }
                           if (response.code==2) {
-                            window.location.href="/admin/dashboard";
+                            window.location.href="{{route('admin-dashboard')}}";
                           }
 
                         }
@@ -465,8 +468,8 @@
                     },
 
                     error:function(response){
-                        $("#spinner-login").hide();
-                        $("#btn-login").removeClass("disabled");
+                        $("#spinner-login-form").hide();
+                        $("#btn-login-home").removeClass("disabled");
                             new PNotify({
                                 text: 'Error occurred , try again later',
                                 animate_speed: 'fast',

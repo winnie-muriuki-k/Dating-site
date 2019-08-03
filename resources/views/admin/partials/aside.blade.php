@@ -8,16 +8,16 @@
           <img src="{{ asset('tempadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{Auth::user()->username}}</p>
+          <p>{{Auth::check() ?  Auth::user()->username : 'Admin'}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
       <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
+      <form action="#" method="post" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                <button type="button" name="search" id="search-btn" class="btn btn-flat">
                   <i class="fa fa-search"></i>
                 </button>
               </span>
@@ -39,28 +39,47 @@
             <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li> --}}
-        <li class="treeview">
-          <a href="#">
+        <li>
+          <a href="{{route('admin-dashboard')}}">
             <i class="fa fa-user"></i>
             <span>Users</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">{{ count(App\User::all()) }}</span>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ route('admin-users')}}"><i class="fa fa-circle-o"></i> Admins</a></li>
-            <li><a href="{{route('normal-users')}}"><i class="fa fa-circle-o"></i> Members</a></li>
-          </ul>
         </li>
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
+        <li><a href="{{ route('roles-view')}}"><i class="fa fa-circle-o"></i> User roles</a></li>
+        <li><a href="{{route('admin-country')}}"><i class="fa fa-circle-o"></i> Countries</a></li>
+        <li><a href="{{route('admin-cities')}}"><i class="fa fa-circle-o"></i> Cities</a></li>
+{{--         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i> <span>Settings</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
+              <small class="label pull-right bg-green"><span class="glyphicon glyphicon-chevron-right"></span></small>
             </span>
           </a>
-        </li>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('roles-view')}}"><i class="fa fa-circle-o"></i> User roles</a></li>
+            <li><a href="{{route('admin-country')}}"><i class="fa fa-circle-o"></i> Countries</a></li>
+            <li><a href="{{route('admin-cities')}}"><i class="fa fa-circle-o"></i> Cities</a></li>
+          </ul>
+        </li> --}}
         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i> <span>User Profile</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green"><span class="glyphicon glyphicon-chevron-right"></span></small>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('gender-view')}}"><i class="fa fa-circle-o"></i> Gender</a></li>
+            <li><a href="{{ route('eye-color-view')}}"><i class="fa fa-circle-o"></i> Eye Color</a></li>
+            <li><a href="{{ route('eye-wear-view')}}"><i class="fa fa-circle-o"></i> Eye Wear</a></li>
+            <li><a href="{{ route('height-view')}}"><i class="fa fa-circle-o"></i> Height</a></li>
+            <li><a href="{{ route('ethicity-view')}}"><i class="fa fa-circle-o"></i> Ethnicity</a></li>
+          </ul>
+        </li>
+{{--         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Charts</span>
@@ -192,7 +211,7 @@
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> --}}
       </ul>
     </section>
     <!-- /.sidebar -->

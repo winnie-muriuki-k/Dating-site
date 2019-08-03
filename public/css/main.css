@@ -26,14 +26,28 @@
     -webkit-appearance:none;
         box-shadow: none !important;
 }
-
+h4{
+      color: #01323a !important;
+}
 img.icon{
   padding-bottom: 5px;
   cursor: pointer;
   display: inline-block;
       margin-left: -20px;
 }
+form#user-complete-registration{
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  border: 1px solid #25cb25; 
+  width: 100%;
+}
 
+h5#complete-registration{
+  text-align: center;
+  margin: 5px;
+}
 
 span.reset-search{
     right: 20px;
@@ -41,4 +55,199 @@ span.reset-search{
     color: white;
     padding: 5px;
     padding-top: 0px;
+}
+
+button#delete-all-chats{
+    margin-bottom: 4px;
+    background: green;
+    color: white;
+    border: 0px;
+    font-size: 12px;
+    cursor: pointer;
+    width: 200px;
+}
+
+td.message-td:hover{
+  background: #03f5032e;
+}
+
+
+ul.pagination{
+      margin: 10px auto;
+    background: #fff;
+}
+div.incoming-message-div{
+  margin-bottom: 5px;
+  background: beige;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 80px;
+  padding-left: 5px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+div.outgoing-message-div{
+    background-color: #fefefe;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 80px;
+    padding-left: 8px;
+    margin-bottom: 5px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+span.message-time{
+  float:right;padding: 2px;color: #878787;
+}
+
+div#message-div{
+  position: fixed;
+  width: 400px;
+  right: 45px;
+  bottom: 0;
+  background: #b1ffdf;
+  padding: 0px !important;
+  border: 1px solid #b1ffdf;
+      margin-bottom: 2%;
+  display: none;
+  z-index: 99999;
+}
+div#conversation-list{
+padding-bottom: 20px;color: black;
+}
+div#conversation-list-holder{
+  height: 380px ;overflow: auto; background: #e4e9cc; margin-bottom: 10px;
+}
+textarea#sender_message{
+  font-size: 12px;
+  padding: 0px ;
+  resize: none;
+  text-indent:10px;
+}
+span#receiver_username{
+  cursor: pointer;
+}
+img#user-profile-image{
+  max-width:100% !important;
+  max-height:80% !important;
+  margin: auto; 
+  cursor: pointer;
+}
+img#logged_in_user_profile_pic{
+  max-height:260px !important;
+  width: 90%;
+  margin: auto;
+  margin-top: 7%;
+}
+button#favorite-user-button:hover{
+  background: transparent;
+  color: red;
+}
+button#send-message-btn:hover{
+    background-color: #28a745;
+    border-color: #28a745;
+}
+div#for-mobile-devices{
+  display: none;
+}
+div#for-laptops-devices{
+  display: inherit;
+}
+
+@media only screen and (max-width: 500px) {
+  div#recent-activities{
+    display: none;
+  }
+  div#for-mobile-devices{
+    display: inherit;
+  }
+  div#for-laptops-devices{
+    display: none;
+  }
+  div#message-div{
+    position: fixed;
+    width: 100%;
+    right: 0px;
+    bottom: 0;
+    background: #b1ffdf;
+    padding: 10px !important;
+    display: none;
+    z-index: 99999;
+  }
+
+  h4.profile-head-nav{
+    color: #fff !important;
+  }
+
+  div#row-one{
+    margin: 0px auto;
+    padding: 0px;
+  }
+
+  div#profile-display-cards{
+    /*width: 70%;*/
+    margin: auto;
+  }
+  img#logged_in_user_profile_pic{
+    width: 90%;
+  }
+  .profile-head-nav{
+    color: #fff;
+  }
+  .progress-bar {
+      background-color: #6bc515;
+  }
+  img#user-profile-image{
+    max-height:100%;
+    max-width:100%;
+    margin: auto;
+        margin-top: 20px;
+        height: auto !important; 
+        cursor: pointer;
+  }
+  textarea#sender_message{
+    font-size: 12px;
+    padding: 0px ;
+    resize: none;
+    width: 80%;
+    text-indent:10px;
+  }
+  div#send-message-btn-div{
+    width: 20%;
+  }
+}
+@media only screen and (min-width: 768px) {
+
+  div#row-one{
+    margin: 0px auto;
+    padding: 0px;
+  }
+  div#row-two{
+    margin: 0px auto;
+    padding: 0px;
+  }
+}
+
+
+div.new-date-div{
+    padding: 1px;
+    color: #929292;
+    border-bottom: 1px solid;
+    position: relative;
+    margin: 20px auto;
+}
+
+span.new-date-span{
+    position: absolute;
+    font-size: 12px;
+    top: -9px;
+    z-index: 9999;
+    background: #fff;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: green;
+    margin: 0px auto;
+    border-radius: 5px;
+    margin-left: 35%;
 }

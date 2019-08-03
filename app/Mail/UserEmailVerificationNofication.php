@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserPasswordReset extends Mailable
+class UserEmailVerificationNofication extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,15 +16,13 @@ class UserPasswordReset extends Mailable
      *
      * @return void
      */
-    protected $email;
-    protected $text;
+    protected $username;
     protected  $url;
 
-    public function __construct($email,$url,$text)
+    public function __construct($username,$url)
     {
-        $this->email =$email;
+        $this->username =$username;
         $this->url =$url;
-        $this->text =$text;
     }
 
     /**
@@ -34,11 +32,10 @@ class UserPasswordReset extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.password_reset')
-          ->subject('Dating App Account password reset')
+        return $this->view('mail.email-verify')
+          ->subject('Dating App Email Verification')
           ->with([
-            'email'=>$this->email,
-            'text'=>$this->text,
+            'username'=>$this->username,
             'url'=>$this->url
           ]);
     }

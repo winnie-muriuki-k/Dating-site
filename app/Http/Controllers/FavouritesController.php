@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\HairColor;
+use App\favourite;
 use Illuminate\Http\Request;
 
-class HairColorController extends Controller
+class FavouritesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class HairColorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\HairColor  $hairColor
+     * @param  \App\favourite  $favourites
      * @return \Illuminate\Http\Response
      */
-    public function show(HairColor $hairColor)
+    public function show(favourite $favourites)
     {
         //
     }
@@ -52,10 +52,10 @@ class HairColorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\HairColor  $hairColor
+     * @param  \App\favourite  $favourites
      * @return \Illuminate\Http\Response
      */
-    public function edit(HairColor $hairColor)
+    public function edit(favourite $favourites)
     {
         //
     }
@@ -64,10 +64,10 @@ class HairColorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\HairColor  $hairColor
+     * @param  \App\favourite  $favourites
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HairColor $hairColor)
+    public function update(Request $request, favourite $favourites)
     {
         //
     }
@@ -75,10 +75,10 @@ class HairColorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\HairColor  $hairColor
+     * @param  \App\favourite  $favourites
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HairColor $hairColor)
+    public function destroy(favourite $favourites)
     {
         //
     }

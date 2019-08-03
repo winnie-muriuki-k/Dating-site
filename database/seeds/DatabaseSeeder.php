@@ -11,8 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-	    $faker = Faker\Factory::create();
 
+	    //DB::table('users')->delete();
+	    $faker = Faker\Factory::create();
 	    for($i = 0; $i < 20; $i++) {
 	    	$username =$faker->userName.$i;
 	        App\User::create([
@@ -26,6 +27,28 @@ class DatabaseSeeder extends Seeder
 	            'password'=>Hash::make($username . "@mailinator.com")
 	        ]);
 	    }
+
+
+
+        DB::table('weights')->delete();
+        for($i = 40; $i <=220; $i++) {
+            $lbs = $i/0.45359237;
+            $name = sprintf($i.'kg (%d lb)', $lbs);
+            App\Weight::create([
+                'name' => $name,
+            ]);
+        }
+
+        DB::table('heights')->delete();
+        for($i = 140; $i <=219; $i+=3) {
+            $inches = $i/2.54;
+            $feet = intval($inches/12);
+            $inches = $inches%12;
+            $name = sprintf('%d` %d`` ('.$i.'cm)', $feet, $inches);
+            App\Height::create([
+                'name' => $name,
+            ]);
+        }
         DB::table('eye_colors')->delete();
         $colors = array(
             array('name' => 'Black'),
@@ -37,6 +60,219 @@ class DatabaseSeeder extends Seeder
             array('name' => 'Other'),
         );
         DB::table('eye_colors')->insert($colors);
+
+        DB::table('hobbies')->delete();
+        $hobbies = array(
+            array('name' => 'Antiques'),
+            array('name' => 'Astrology'),
+            array('name' => 'Bars/Pubs/Nightclubs'),
+            array('name' => 'Board /Card Games'),
+            array('name' => 'Cars / Mechanics'),
+            array('name' => 'Concerts / Live Music'),
+            array('name' => 'Philosophy / Spirituality'),
+            array('name' => 'Dancing'),
+            array('name' => 'Computers / Internet'),
+            array('name' => 'Camping / Nature'),
+            array('name' => 'pets'),
+            array('name' => 'Family'),
+            array('name' => 'Movies/Camera'),
+            array('name' => 'Crafts'),
+            array('name' => 'Beach Parties'),
+            array('name' => 'News / Politics'),
+            array('name' => 'Art / Painting'),
+            array('name' => 'Poetry'),
+            array('name' => 'Education'),
+        );
+        DB::table('hobbies')->insert($hobbies);
+
+        DB::table('foods')->delete();
+        $foods = array(
+            array('name' => 'American'),
+            array('name' => 'Cajun / Southern'),
+            array('name' => 'Vegetarian / Organic'),
+            array('name' => 'Japanese / Sushi'),
+            array('name' => 'California-Fusion'),
+            array('name' => 'Fast Food / Pizza'),
+            array('name' => 'German'),
+            array('name' => 'Italian'),
+            array('name' => 'Vegan'),
+            array('name' => 'Seafood'),
+            array('name' => 'Mexican'),
+            array('name' => 'Barbecue'),
+            array('name' => 'Eastern European'),
+            array('name' => 'Middle Eastern'),
+            array('name' => 'Vietnamese'),
+            array('name' => 'South American'),
+            array('name' => 'Chinese / Dim Sum'),
+            array('name' => 'Jewish / Kosher'),
+            array('name' => 'Greek'),
+        );
+        DB::table('foods')->insert($foods);
+
+        DB::table('music_types')->delete();
+        $types = array(
+            array('name' => 'Alternative'),
+            array('name' => 'Country / Folk'),
+            array('name' => 'Soft Rock'),
+            array('name' => 'Religious'),
+            array('name' => 'Rap'),
+            array('name' => 'Pop'),
+            array('name' => 'Dance / Techno'),
+            array('name' => 'Classical / Opera'),
+            array('name' => 'World'),
+            array('name' => 'Rock'),
+            array('name' => 'RnB / Hip Hop'),
+            array('name' => 'Jazz / Blues'),
+            array('name' => 'New Age'),
+        );
+        DB::table('music_types')->insert($types);
+
+        DB::table('sports')->delete();
+        $sports = array(
+            array('name' => 'Aerobics'),
+            array('name' => 'Archery'),
+            array('name' => 'Auto Racing'),
+            array('name' => 'Bodybuilding'),
+            array('name' => 'Extreme Sports'),
+            array('name' => 'Bowling'),
+            array('name' => 'Hiking'),
+            array('name' => 'Figure Skating'),
+            array('name' => 'Diving'),
+            array('name' => 'Boxing'),
+            array('name' => 'Biking'),
+            array('name' => 'Yoga / Pilates'),
+            array('name' => 'Motor Sports'),
+            array('name' => 'Bowling'),
+            array('name' => 'Jet / Water Skiing'),
+            array('name' => 'Horse Riding'),
+            array('name' => 'Cricket'),
+            array('name' => 'ce Skating / Ice Hockey'),
+            array('name' => 'Hang Gliding / Paragliding'),
+        );
+        DB::table('sports')->insert($sports);
+
+        DB::table('body_types')->delete();
+        $body_types = array(
+            array('name' => 'Petite'),
+            array('name' => 'Slim'),
+            array('name' => 'Athletic'),
+            array('name' => 'Average'),
+            array('name' => 'Few Extra Pounds'),
+            array('name' => 'Full Figured'),
+            array('name' => 'Large and Lovely'),
+        );
+        DB::table('body_types')->insert($body_types);
+
+        DB::table('ethnicities')->delete();
+        $ethnicities = array(
+            array('name' => 'African'),
+            array('name' => 'African American'),
+            array('name' => 'Afro Carribean'),
+            array('name' => 'Arab(Middle Eastern) '),
+            array('name' => 'Asian'),
+            array('name' => 'Caucasian(White)'),
+            array('name' => 'Hispanic Latino'),
+            array('name' => 'Indian'),
+            array('name' => 'Mixed'),
+            array('name' => 'Pacific Islander'),
+            array('name' => 'Other'),
+        );
+        DB::table('ethnicities')->insert($ethnicities);
+
+        DB::table('complexions')->delete();
+        $complexions = array(
+            array('name' => 'Dark Brown'),
+            array('name' => 'Brown'),
+            array('name' => 'Light Brown'),
+            array('name' => 'White'),
+        );
+        DB::table('complexions')->insert($complexions);
+
+        DB::table('drinking_statuses')->delete();
+        $statuses = array(
+            array('name' => 'Do Drink'),
+            array('name' => 'Occasionally Drink'),
+            array('name' => 'Don`t Drink'),
+
+        );
+        DB::table('drinking_statuses')->insert($statuses);
+
+        DB::table('smoking_statuses')->delete();
+        $statuses = array(
+            array('name' => 'Do Smoke'),
+            array('name' => 'Occasionally Smoke'),
+            array('name' => 'Don`t Smoke'),
+
+        );
+        DB::table('smoking_statuses')->insert($statuses);
+
+        DB::table('facial_hair_types')->delete();
+        $facial_hair_types = array(
+            array('name' => 'Clean Shaven'),
+            array('name' => 'Sideburns'),
+            array('name' => 'Mustache'),
+            array('name' => 'Goatee'),
+            array('name' => 'Short Beard'),
+            array('name' => 'Medium Beard'),
+            array('name' => 'Long Beard'),
+        );
+        DB::table('facial_hair_types')->insert($facial_hair_types);
+
+        DB::table('best_features')->delete();
+        $best_features= array(
+            array('name' => 'If you are lucky i will show you later'),
+            array('name' => 'My arms'),
+            array('name' => 'My Butt'),
+            array('name' => 'My Chest'),
+            array('name' => 'My Eyes'),
+            array('name' => 'My Legs'),
+            array('name' => 'My Lips'),
+            array('name' => 'My Personality'),
+            array('name' => 'My Smile'),
+            array('name' => 'My Wallet'),
+            array('name' => 'Other'),
+            array('name' => 'Prefer not to say'),
+        );
+        DB::table('best_features')->insert($best_features);
+
+        DB::table('best_features')->delete();
+        $best_features= array(
+            array('name' => 'If you are lucky i will show you later'),
+            array('name' => 'My arms'),
+            array('name' => 'My Butt'),
+            array('name' => 'My Chest'),
+            array('name' => 'My Eyes'),
+            array('name' => 'My Legs'),
+            array('name' => 'My Lips'),
+            array('name' => 'My Personality'),
+            array('name' => 'My Smile'),
+            array('name' => 'My Wallet'),
+            array('name' => 'Other'),
+            array('name' => 'Prefer not to say'),
+        );
+        DB::table('best_features')->insert($best_features);
+
+        DB::table('body_arts')->delete();
+        $body_arts= array(
+            array('name' => 'Branding'),
+            array('name' => 'Earrings'),
+            array('name' => 'None'),
+            array('name' => 'Other'),
+            array('name' => 'Piercing'),
+            array('name' => 'Prefer not to say'),
+            array('name' => 'Tattoo'),
+        );
+        DB::table('body_arts')->insert($body_arts);
+
+        DB::table('beauty_levels')->delete();
+        $beauty_levels= array(
+            array('name' => 'Below Average'),
+            array('name' => 'Average'),
+            array('name' => 'Attractive'),
+            array('name' => 'Very Attractive'),
+        );
+        DB::table('beauty_levels')->insert($beauty_levels);
+
 
         DB::table('countries')->delete();
         $countries = array(
@@ -285,6 +521,8 @@ class DatabaseSeeder extends Seeder
         );
         DB::table('countries')->insert($countries);
 
+        // DB::table("cities")->delete();
+        
         DB::table('eye_wears')->delete();
         $wears = array(
             array('name' => 'Contacts'),
@@ -306,6 +544,23 @@ class DatabaseSeeder extends Seeder
             array('name' => 'Changes Frequently'),
         );
         DB::table('hair_colors')->insert($colors);
+        DB::table('genders')->delete();
+        $genders = array(
+            array('name' => 'Male'),
+            array('name' => 'Female'),
+        );
+        DB::table('genders')->insert($genders);
+
+        DB::table('motives')->delete();
+        $motives = array(
+            array('name' => 'Any'),
+            array('name' => 'Friendship'),
+            array('name' => 'Marriage'),
+            array('name' => 'Penpal'),
+            array('name' => 'Romantic Dating'),
+        );
+        DB::table('motives')->insert($motives);
+
 
         DB::table('hair_lengths')->delete();
         $lengths = array(

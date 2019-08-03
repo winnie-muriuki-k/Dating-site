@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HairColor extends Model
+class BestFeature extends Model
 {
     //
 }

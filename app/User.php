@@ -19,6 +19,7 @@ class User extends Authenticatable
         'username', 'email', 'password','gender','age','avatar'
     ];
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -51,6 +52,15 @@ class User extends Authenticatable
         // hasMany(RelatedModel, foreignKeyOnRelatedModel = user_id, localKey = id)
         return $this->hasOne(Matches::class,'initator');
     }
+    public function profileVisits()
+    {
+        // hasMany(RelatedModel, foreignKeyOnRelatedModel = user_id, localKey = id)
+        return $this->hasOne(ProfileVisit::class,'user_id');
+    }
+
+    public function seeking(){
+        return $this->belongsTo(Gender::class, 'seeking_id');
+    }
     /**
      * User has many Messages.
      *
@@ -64,4 +74,33 @@ class User extends Authenticatable
     public function profile(){
         return $this->belongsTo(Profile::class, 'profile_id');
     }
+
+    public function hobbies()
+    {
+        return $this->hasMany(UserHobby::class, 'user_id');
+    }
+    public function music()
+    {
+        return $this->hasMany(UserMusicType::class, 'user_id');
+    }
+    public function foods()
+    {
+        return $this->hasMany(UserFood::class, 'user_id');
+    }
+    public function sports()
+    {
+        return $this->hasMany(UserSport::class, 'user_id');
+    }
+    public function myFavourites ()
+    {
+        return $this->hasMany(Favourite::class, 'initiator_id');
+    }
+
+    public function favouritedMe()
+    {
+        return $this->hasMany(Favourite::class, 'recipient_id');
+    }
+
+
+
 }

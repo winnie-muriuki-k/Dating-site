@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Conversation extends Model
 {
-	use SoftDeletes;
+	// use SoftDeletes;
     //
     /**
      * Message belongs to Sender.
@@ -20,6 +20,7 @@ class Conversation extends Model
 
     	return $this->belongsTo('App\User','person_one');
     }
+    //
 
     /**
      * Message belongs to Receiver.
@@ -29,6 +30,7 @@ class Conversation extends Model
     public function personTwo()
     {
     	// belongsTo(RelatedModel, foreignKey = receiver_id, keyOnRelatedModel = id)
+        //receiver
     	return $this->belongsTo('App\User','person_two');
     }
     /**
@@ -41,4 +43,5 @@ class Conversation extends Model
     	// hasMany(RelatedModel, foreignKeyOnRelatedModel = conversation_id, localKey = id)
     	return $this->hasMany(Message::class,'conversation_id');
     }
+
 }

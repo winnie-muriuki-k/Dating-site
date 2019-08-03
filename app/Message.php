@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Message extends Model
 {
-	use SoftDeletes;
+	// use SoftDeletes;
 
     /**
      * Message has many Replies.
@@ -38,6 +38,26 @@ class Message extends Model
     public function user()
     {
         // belongsTo(RelatedModel, foreignKey = user_id, keyOnRelatedModel = id)
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class,'sender_id');
+    }
+    /**
+     * Message belongs to Sender.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function senderPerson()
+    {
+        // belongsTo(RelatedModel, foreignKey = user_id, keyOnRelatedModel = id)
+        return $this->belongsTo(User::class,'sender_id');
+    }
+    /**
+     * Message belongs to Receiver.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function receiverPerson()
+    {
+        // belongsTo(RelatedModel, foreignKey = user_id, keyOnRelatedModel = id)
+        return $this->belongsTo(User::class,'receiver_id');
     }
 }
